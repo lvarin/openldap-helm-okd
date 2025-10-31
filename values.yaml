@@ -1,5 +1,11 @@
 enabled: false
 storage: 1Gi
+openshift:
+  enabled: true
+  registry: image-registry.openshift-image-registry.svc:5000
+image:
+  repository: openldap
+  tag: 2.6.10
 ldap:
   admin:
     user: admin
