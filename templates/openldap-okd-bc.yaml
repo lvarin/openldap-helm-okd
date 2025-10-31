@@ -7,13 +7,14 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: 'openldap-okd:latest'
+      name: 'openldap-okd:{{ .Values.image.tag }}'
   postCommit: {}
   resources: {}
   runPolicy: Serial
   source:
     dockerfile: |-
-      FROM docker.io/bitnamilegacy/openldap
+      FROM docker.io/bitnamilegacy/openldap:{{ .Values.image.tag }}
+      # Not used, form of BuildConfig is used
 
       USER root
 
@@ -24,8 +25,8 @@ spec:
   strategy:
     dockerStrategy:
       from:
-        kind: DockerImage
-        name: docker.io/bitnamilegacy/openldap
+        kind: ImageStreamTag
+        name: 'openldap:{{ .Values.image.tag }}'
     type: Docker
   successfulBuildsHistoryLimit: 5
   triggers:
